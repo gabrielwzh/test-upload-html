@@ -1,0 +1,19 @@
+{
+	"applinks": {
+		"apps": [],
+		"details": [
+			{
+				"appID": "8LAMR92KJ8.com.dbs.sit1.dbsmbanking",
+				"paths": [ "*"]
+			},
+                         {
+				"appID": "8LAMR92KJ8.com.dbs.sit1.posbmbanking",
+				"paths": [ "*"]
+			},
+                         {
+				"appID": "8LAMR92KJ8.com.dbs.sg.uat.dbsiwealth",
+				"paths": [ "*"]
+			}
+		]
+	}
+}
