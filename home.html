@@ -34,14 +34,31 @@ if (navigator.userAgent.toLowerCase().indexOf("android") >-1) {
 	var AppId = getUrlVars()["APP_ID"];
 	var serviceId = getUrlVars()["SERVICE_ID"];
 	var Source = getUrlVars()["SOURCE"];
-	var dbsURL = 'intent://com.dbs.sg.dbsdigibank/promoid/?serviceID='+serviceId+'&source='+Source+'#Intent;scheme=dbsdigibank;S.browser_fallback_url='+androidDBSAppStore+';end'
-	launchAndroidApp(dbsURL);
+	var universalUrl = 'intent://com.dbs.sg.dbsdigibank/promoid/?serviceID='+serviceId+'&source='+Source+'#Intent;scheme=dbsdigibank;S.browser_fallback_url='+androidDBSAppStore+';end'
+	var dbsURL = 'intent://com.dbs.sg.dbsmbanking/promoid/?serviceID='+serviceId+'&source='+Source+'#Intent;scheme=dbsmbanking;package=com.dbs.sit1.dbsmbanking;S.browser_fallback_url='+androidDBSAppStore+';end'
+	var posbURL = 'intent://com.dbs.sg.posbmbanking/promoid/?serviceID='+serviceId+'&source='+Source+'#Intent;scheme=posbmbanking;package=com.dbs.sit1.posbmbanking;S.browser_fallback_url='+androidPOSBAppStore+';end'
+	var iwealthURL = 'intent://com.dbs.sg.dbsiwealth/promoid/?serviceID='+serviceId+'&source='+Source+'#Intent;scheme=DBSiWealthSG;package=com.dbs.sit1.dbsiwealth;S.browser_fallback_url='+androidiWealthStore+';end'
+	if(AppId == "DBS")
+		launchAndroidApp(dbsURL);
+	else if(AppId == "POSB")
+		launchAndroidApp(posbURL);
+	else if(AppId == "iWealth")
+		launchAndroidApp(iwealthURL);
+	else
+		launchAndroidApp(universalUrl);
  }
 else if ((navigator.userAgent.indexOf('iPhone') != -1) || (navigator.userAgent.indexOf('iPod') != -1) || (navigator.userAgent.indexOf('iPad') != -1)) {
 	var AppId = getUrlVars()["APP_ID"];
 	var serviceId = getUrlVars()["SERVICE_ID"];
 	var Source = getUrlVars()["SOURCE"];
-	// launchiOSAppDBS('DBSDigibankTest://'+'?serviceID='+serviceId+''+'&source='+Source,'https://itunes.apple.com/sg/app/dbs-digibank-sg/id1068403826?mt=8');
+	if(AppId == "DBS")
+		launchiOSAppDBS('DBSDigibankSG://'+'?serviceID='+serviceId+''+'&source='+Source,'https://itunes.apple.com/sg/app/dbs-digibank-sg/id1068403826?mt=8');
+	else if(AppId == "POSB")
+		launchiOSAppDBS('POSBDigibankSG://'+'?serviceID='+serviceId+''+'&source='+Source,'https://itunes.apple.com/us/app/posb-mobile-banking/id1068416633&mt=8');
+	else if(AppId == "iWealth")
+		launchiOSAppDBS('DBSiWealthSG://'+'?serviceID='+serviceId+''+'&source='+Source,'https://itunes.apple.com/us/app/dbs-iwealth-sg/id1179928963?ls=1&mt=8');
+	else
+		launchiOSAppDBS('DBSDigibankTest://'+'?serviceID='+serviceId+''+'&source='+Source,'https://itunes.apple.com/sg/app/dbs-digibank-sg/id1068403826?mt=8');
 
  }else {
       //if it is Web
