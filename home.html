@@ -37,7 +37,7 @@ if (navigator.userAgent.toLowerCase().indexOf("android") >-1) {
 	var universalUrl = 'intent://com.dbs.sg.dbsdigibank/promoid/?serviceID='+serviceId+'&source='+Source+'#Intent;scheme=dbsdigibank;S.browser_fallback_url='+androidDBSAppStore+';end';
 	var dbsURL = 'intent://com.dbs.sg.dbsmbanking/promoid/?serviceID='+serviceId+'&source='+Source+'#Intent;scheme=dbsmbanking;package=com.dbs.sit1.dbsmbanking;S.browser_fallback_url='+androidDBSAppStore+';end';
 	var posbURL = 'intent://com.dbs.sg.posbmbanking/promoid/?serviceID='+serviceId+'&source='+Source+'#Intent;scheme=posbmbanking;package=com.dbs.sit1.posbmbanking;S.browser_fallback_url='+androidPOSBAppStore+';end';
-	var iwealthURL = 'intent://com.dbs.sg.dbsiwealth/promoid/?serviceID='+serviceId+'&source='+Source+'#Intent;scheme=DBSiWealthSG;package=com.dbs.sit1.dbsiwealth;S.browser_fallback_url='+androidiWealthStore+';end';
+	var iwealthURL = 'intent://com.dbs.sg.dbsiwealth/promoid/?serviceID='+serviceId+'&source='+Source+'#Intent;scheme=dbsiwealthsg;package=com.dbs.uat.dbsiwealth;S.browser_fallback_url='+androidiWealthStore+';end';
 	if(AppId == "DBS")
 		launchAndroidApp(dbsURL);
 	else if(AppId == "POSB")
