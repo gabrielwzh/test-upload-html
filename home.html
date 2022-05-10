@@ -26,43 +26,58 @@ function launchiOSAppDBS(url,appstoreURL) {
 
 function onClickOpenApp()
 {
+
+var features = ['QLLiveBetter','QLGiveBetter','QLInvestBetter','QLCarbonFootprint','QLInvestBetterETF','QLCarbonOffset'];
+
 	//alert("Android"+navigator.userAgent.toLowerCase().indexOf("android"));
 if (navigator.userAgent.toLowerCase().indexOf("android") >-1) {
 	var androidDBSAppStore = "https://play.google.com/store/apps/details?id=com.dbs.sg.dbsmbanking&hl=en";
 	var androidPOSBAppStore = "https://play.google.com/store/apps/details?id=com.dbs.sg.posbmbanking&hl=en";
 	var androidiWealthStore = "https://play.google.com/store/apps/details?id=com.dbs.sg.iwealth";
 	var AppId = getUrlVars()["APP_ID"];
-	var serviceId = getUrlVars()["SERVICE_ID"];
+	var feature = getUrlVars()["FEATURE"];
 	var sourceId = getUrlVars()["SOURCE"];
-	var universalUrl = 'intent://com.dbs.sg.dbsdigibank/promoid/?serviceID='+serviceId+'\&source='+sourceId+'#Intent;scheme=dbsdigibank;S.browser_fallback_url='+androidDBSAppStore+';end';
-	var dbsURL = 'intent://com.dbs.sg.dbsmbanking/promoid/?serviceID='+serviceId+'\&source='+sourceId+'#Intent;scheme=dbsmbanking;package=com.dbs.sit1.dbsmbanking;S.browser_fallback_url='+androidDBSAppStore+';end';
-	var posbURL = 'intent://com.dbs.sg.posbmbanking/promoid/?serviceID='+serviceId+'\&source='+sourceId+'#Intent;scheme=posbmbanking;package=com.dbs.sit1.posbmbanking;S.browser_fallback_url='+androidPOSBAppStore+';end';
-	var iwealthURL = 'intent://com.dbs.sg.uat.dbsiwealth/promoid/?serviceID='+serviceId+'\&source='+sourceId+'#Intent;scheme=dbsiwealthsg;package=com.dbs.sg.uat.dbsiwealth;S.browser_fallback_url='+androidiWealthStore+';end';
-	if(AppId == "DBS")
-		launchAndroidApp(dbsURL);
-	else if(AppId == "POSB")
-		launchAndroidApp(posbURL);
-	else if(AppId == "iWealth")
-		launchAndroidApp(iwealthURL);
-	else
-		launchAndroidApp(universalUrl);
+	var universalUrl = 'intent://com.dbs.sg.dbsdigibank/promoid/?serviceID='+feature+'\&source='+sourceId+'#Intent;scheme=dbsdigibank;S.browser_fallback_url='+androidDBSAppStore+';end';
+	var dbsURL = 'intent://com.dbs.sg.dbsmbanking/promoid/?serviceID='+feature+'\&source='+sourceId+'#Intent;scheme=dbsmbanking;package=com.dbs.sit1.dbsmbanking;S.browser_fallback_url='+androidDBSAppStore+';end';
+	var posbURL = 'intent://com.dbs.sg.posbmbanking/promoid/?serviceID='+feature+'\&source='+sourceId+'#Intent;scheme=posbmbanking;package=com.dbs.sit1.posbmbanking;S.browser_fallback_url='+androidPOSBAppStore+';end';
+	var iwealthURL = 'intent://com.dbs.sg.uat.dbsiwealth/promoid/?serviceID='+feature+'\&source='+sourceId+'#Intent;scheme=dbsiwealthsg;package=com.dbs.sg.uat.dbsiwealth;S.browser_fallback_url='+androidiWealthStore+';end';
+
+	if(features.includes(feature)) {
+		if(AppId == "DBS")
+			launchAndroidApp(dbsURL);
+		else if(AppId == "POSB")
+			launchAndroidApp(posbURL);
+		else if(AppId == "iWealth")
+			launchAndroidApp(iwealthURL);
+		else
+			launchAndroidApp(universalUrl);
+	} else {
+		window.location = "https://www.dbs.com.sg/personal/livebetter";
+	}
+
  }
 else if ((navigator.userAgent.indexOf('iPhone') != -1) || (navigator.userAgent.indexOf('iPod') != -1) || (navigator.userAgent.indexOf('iPad') != -1)) {
 	var AppId = getUrlVars()["APP_ID"];
-	var serviceId = getUrlVars()["SERVICE_ID"];
+	var feature = getUrlVars()["FEATURE"];
 	var Source = getUrlVars()["SOURCE"];
-	if(AppId == "DBS")
-		launchiOSAppDBS('DBSDigibankSG://'+'?serviceID='+serviceId+''+'&source='+Source,'https://itunes.apple.com/sg/app/dbs-digibank-sg/id1068403826?mt=8');
-	else if(AppId == "POSB")
-		launchiOSAppDBS('POSBDigibankSG://'+'?serviceID='+serviceId+''+'&source='+Source,'https://itunes.apple.com/us/app/posb-mobile-banking/id1068416633&mt=8');
-	else if(AppId == "iWealth")
-		launchiOSAppDBS('DBSiWealthSG://'+'?serviceID='+serviceId+''+'&source='+Source,'https://itunes.apple.com/us/app/dbs-iwealth-sg/id1179928963?ls=1&mt=8');
-	else
-		launchiOSAppDBS('DBSDigibankTest://'+'?serviceID='+serviceId+''+'&source='+Source,'https://itunes.apple.com/sg/app/dbs-digibank-sg/id1068403826?mt=8');
+
+	if(features.includes(feature)) {
+		if(AppId == "DBS")
+			launchiOSAppDBS('DBSDigibankSG://'+'?serviceID='+feature+''+'&source='+Source,'https://itunes.apple.com/sg/app/dbs-digibank-sg/id1068403826?mt=8');
+		else if(AppId == "POSB")
+			launchiOSAppDBS('POSBDigibankSG://'+'?serviceID='+feature+''+'&source='+Source,'https://itunes.apple.com/us/app/posb-mobile-banking/id1068416633&mt=8');
+		else if(AppId == "iWealth")
+			launchiOSAppDBS('DBSiWealthSG://'+'?serviceID='+feature+''+'&source='+Source,'https://itunes.apple.com/us/app/dbs-iwealth-sg/id1179928963?ls=1&mt=8');
+		else
+			launchiOSAppDBS('DBSDigibank://'+'?serviceID='+feature+''+'&source='+Source,'https://itunes.apple.com/sg/app/dbs-digibank-sg/id1068403826?mt=8');
+
+	}else {
+		window.location = "https://www.dbs.com.sg/personal/livebetter";
+	}
 
  }else {
       //if it is Web
-      window.location = 'https://internet-banking.dbs.com.sg/IB/Welcome?FROM_IB=TRUE&DBS=TRUE';
+      window.location = "https://www.dbs.com.sg/personal/livebetter";
  }
 }
 
